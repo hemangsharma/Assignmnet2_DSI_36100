@@ -133,6 +133,114 @@ data_test[null_columns].isnull().sum()
 # ## 1. Feature Distribution
 
 # %%
+X = df_train.drop(columns=['RainTomorrow'])
+y = df_train['RainTomorrow']
+df = pd.concat([X, df_test], axis=0)
+
+# %%
+df.describe().T
+
+# %%
+df.drop(columns='row ID', inplace=True)
+total = df.isnull().sum().sort_values(ascending=False)
+percent = (df.isnull().sum() / df.isnull().count()).sort_values(ascending=False)
+missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
+missing_data
+
+# %%
+df.drop(columns=['Sunshine', 'Evaporation'], inplace=True)
+df.dtypes
+
+# %%
+categorical = df.select_dtypes(include = "object").columns
+cleaner = ColumnTransformer([
+    ('categorical_transformer', SimpleImputer(strategy='most_frequent'), categorical)
+])
+df[categorical] = cleaner.fit_transform(df[categorical])
+
+null_columns=df.columns[df.isnull().any()]
+df[null_columns].isnull().sum()
+
+# %%
+df = df.fillna(df.median())
+df.isnull().sum()
+
+# %%
+categorical = df.select_dtypes(include = "object").columns
+for i in range(len(categorical)):
+    print(df[categorical[i]].value_counts())
+    print('************************************\n')
+
+# %%
+from sklearn.preprocessing import LabelEncoder
+
+for col in df.columns:
+    if df[col].dtype == 'object':
+        df[col] = df[col].astype(str)
+        df[col] = LabelEncoder().fit_transform(df[col])
+
+df
+
+
+# %%
+'''objects = df.select_dtypes(include = "object").columns
+for i in range(len(objects)):
+    df[objects[i]] = LabelEncoder().fit_transform(df[objects[i]])
+
+df'''
+
+# %%
+train = df.iloc[:99516,:]
+new_train = pd.concat([train, y], axis=1)
+test = df.iloc[99516:, :]
+new_train
+
+# %%
+plt.figure(figsize=(17,18))
+cor = new_train.corr()
+sns.heatmap(cor, annot=True, cmap=plt.cm.Reds,fmt='.2f')
+
+# %%
+sns.histplot(new_train['Humidity9am'])
+
+# %%
+sns.histplot(new_train['Humidity3pm'])
+
+# %%
+sns.boxplot(x=new_train['Cloud9am'])
+
+# %%
+sns.boxplot(x=new_train['Cloud3pm'])
+
+# %%
+sns.countplot(x=new_train['RainToday'])
+
+# %%
+new_train['RainTomorrow'].value_counts()
+
+# %%
+sns.countplot(x=new_train['RainTomorrow'])
+
+# %%
+df_majority_0 = new_train[(new_train['RainTomorrow']==0)] 
+df_minority_1 = new_train[(new_train['RainTomorrow']==1)] 
+
+df_minority_upsampled = resample(df_minority_1, 
+                                 replace=True,    
+                                 n_samples= 77157, 
+                                 random_state=42) 
+
+df_upsampled = pd.concat([df_minority_upsampled, df_majority_0])
+
+# %%
+plt.figure(figsize=(17,18))
+cor = df_upsampled.corr()
+sns.heatmap(cor, annot=True, cmap=plt.cm.Reds,fmt='.2f')
+
+# %%
+sns.countplot(x=df_upsampled['RainTomorrow'])
+
+# %%
 sns.displot(data_test, x="MinTemp", hue='RainToday', kde=True)
 plt.title("Minimum Temperature Distribution", fontsize = 14)
 plt.show()
@@ -379,115 +487,7 @@ plt.xticks(rotation=80)
 plt.show()
 
 # %% [markdown]
-# ## Model
-
-# %%
-X = df_train.drop(columns=['RainTomorrow'])
-y = df_train['RainTomorrow']
-df = pd.concat([X, df_test], axis=0)
-
-# %%
-df.describe().T
-
-# %%
-df.drop(columns='row ID', inplace=True)
-total = df.isnull().sum().sort_values(ascending=False)
-percent = (df.isnull().sum() / df.isnull().count()).sort_values(ascending=False)
-missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
-missing_data
-
-# %%
-df.drop(columns=['Sunshine', 'Evaporation'], inplace=True)
-df.dtypes
-
-# %%
-categorical = df.select_dtypes(include = "object").columns
-cleaner = ColumnTransformer([
-    ('categorical_transformer', SimpleImputer(strategy='most_frequent'), categorical)
-])
-df[categorical] = cleaner.fit_transform(df[categorical])
-
-null_columns=df.columns[df.isnull().any()]
-df[null_columns].isnull().sum()
-
-# %%
-df = df.fillna(df.median())
-df.isnull().sum()
-
-# %%
-categorical = df.select_dtypes(include = "object").columns
-for i in range(len(categorical)):
-    print(df[categorical[i]].value_counts())
-    print('************************************\n')
-
-# %%
-from sklearn.preprocessing import LabelEncoder
-
-for col in df.columns:
-    if df[col].dtype == 'object':
-        df[col] = df[col].astype(str)
-        df[col] = LabelEncoder().fit_transform(df[col])
-
-df
-
-
-# %%
-'''objects = df.select_dtypes(include = "object").columns
-for i in range(len(objects)):
-    df[objects[i]] = LabelEncoder().fit_transform(df[objects[i]])
-
-df'''
-
-# %%
-train = df.iloc[:99516,:]
-new_train = pd.concat([train, y], axis=1)
-test = df.iloc[99516:, :]
-new_train
-
-# %%
-plt.figure(figsize=(17,18))
-cor = new_train.corr()
-sns.heatmap(cor, annot=True, cmap=plt.cm.Reds,fmt='.2f')
-
-# %%
-sns.histplot(new_train['Humidity9am'])
-
-# %%
-sns.histplot(new_train['Humidity3pm'])
-
-# %%
-sns.boxplot(x=new_train['Cloud9am'])
-
-# %%
-sns.boxplot(x=new_train['Cloud3pm'])
-
-# %%
-sns.countplot(x=new_train['RainToday'])
-
-# %%
-new_train['RainTomorrow'].value_counts()
-
-# %%
-sns.countplot(x=new_train['RainTomorrow'])
-
-# %%
-df_majority_0 = new_train[(new_train['RainTomorrow']==0)] 
-df_minority_1 = new_train[(new_train['RainTomorrow']==1)] 
-
-df_minority_upsampled = resample(df_minority_1, 
-                                 replace=True,    
-                                 n_samples= 77157, 
-                                 random_state=42) 
-
-df_upsampled = pd.concat([df_minority_upsampled, df_majority_0])
-
-# %%
-plt.figure(figsize=(17,18))
-cor = df_upsampled.corr()
-sns.heatmap(cor, annot=True, cmap=plt.cm.Reds,fmt='.2f')
-
-# %%
-sns.countplot(x=df_upsampled['RainTomorrow'])
+# ## Models
 
 # %%
 X = df_upsampled.drop(columns='RainTomorrow')
@@ -500,8 +500,20 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.9, shuffl
 RandomForestClassifierModel = RandomForestClassifier(criterion = 'gini', max_depth=17, n_estimators=100, random_state=44)
 RandomForestClassifierModel.fit(X_train, y_train)
 
+
 print('RandomForestClassifierModel Train Score is : ' , RandomForestClassifierModel.score(X_train, y_train))
 print('RandomForestClassifierModel Test Score is : ' , RandomForestClassifierModel.score(X_test, y_test))
+
+# %%
+import joblib
+from sklearn.ensemble import RandomForestClassifier
+
+# Build and train your model
+# fit your model on training data
+
+# Save your trained model
+joblib.dump(RandomForestClassifierModel, 'RandomForestClassifierModel.joblib')
+
 
 # %%
 y_pred_RF = RandomForestClassifierModel.predict(X_test)
@@ -517,6 +529,9 @@ GBCModel = GradientBoostingClassifier(n_estimators=200, max_depth=11, learning_r
 GBCModel.fit(X_train, y_train)
 print('GBCModel Train Score is : ' , GBCModel.score(X_train, y_train))
 print('GBCModel Test Score is : ' , GBCModel.score(X_test, y_test))
+
+# %%
+joblib.dump(GBCModel, 'GBCModel.joblib')
 
 # %%
 y_pred_GB = GBCModel.predict(X_test)
@@ -579,6 +594,7 @@ print("Best Accuracy Score:", rscv.best_score_)
 rfc_best = rscv.best_estimator_
 print("Test Accuracy Score:", rfc_best.score(X_test, y_test))
 
+joblib.dump(rfc, 'rfc.joblib')
 
 # %% [markdown]
 # 2. Receiver Operating Characteristic (ROC) Curve:
@@ -607,6 +623,8 @@ plt.plot([0, 1], [0, 1], linestyle='--', lw=2, color='r', label='Random Guess')
 plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.0])
 plt.xlabel('False Positive Rate (FPR)')
+
+joblib.dump(gbc, 'gbc.joblib')
 
 # %%
 print(fpr, tpr)
