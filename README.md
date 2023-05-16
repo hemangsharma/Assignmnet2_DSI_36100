@@ -12,8 +12,7 @@ The objective of this project is develop a predictive classifier to predict the 
 |  1 | Hemang Sharma | 24695785 |
 |  2 |  Jyoti Khurana| 14075648 |
 |  3 | Mahjabeen Mohiuddin | 24610507 |
-|  4 | Manal Ydkw | 24980447 |
-|  5 | Suyash Santosh Tapase | 24678207 |
+|  4 | Suyash Santosh Tapase | 24678207 |
 
 
 ## Library used 
