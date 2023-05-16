@@ -486,6 +486,149 @@ plt.xticks(rotation=80)
 plt.show()
 
 # %% [markdown]
+# Finding the list of positive integer numbers from the dataset
+
+# %%
+import pandas as pd
+# Select the columns containing the numerical data
+numerical_columns = ['MinTemp', 'MaxTemp', 'Rainfall', 'WindGustSpeed', 'WindSpeed9am', 'WindSpeed3pm',
+                     'Humidity9am', 'Humidity3pm', 'Pressure9am', 'Pressure3pm', 'Cloud9am', 'Cloud3pm',
+                     'Temp9am', 'Temp3pm']
+
+# Create an empty list to store the positive integer numbers
+positive_integers = []
+
+# Iterate over each column
+for column in numerical_columns:
+    # Filter out positive integers from the column
+    positive_values = data_test[column][(data_test[column] > 0) & (data_test[column] % 1 == 0)]
+    # Append the positive integers to the list
+    positive_integers.extend(positive_values.tolist())
+
+# Print the list of positive integer numbers
+print("List of positive integer numbers:")
+print(positive_integers)
+
+
+# %% [markdown]
+# ### Mean & Standard Deviation
+
+# %%
+import pandas as pd
+# Select the columns for which you want to calculate the mean
+columns = ['MinTemp', 'MaxTemp', 'Rainfall', 'WindGustSpeed', 'WindSpeed9am', 'WindSpeed3pm',
+           'Humidity9am', 'Humidity3pm', 'Pressure9am', 'Pressure3pm', 'Cloud9am', 'Cloud3pm',
+           'Temp9am', 'Temp3pm', 'RainToday']
+
+# Calculate the mean for each column
+mean_values = data_test[columns].mean()
+
+# Print the mean for each column
+print("Mean for each column:")
+print(mean_values)
+
+# %%
+import pandas as pd
+
+# Select the columns for which you want to calculate the standard deviation
+columns = ['MinTemp', 'MaxTemp', 'Rainfall', 'WindGustSpeed', 'WindSpeed9am', 'WindSpeed3pm',
+           'Humidity9am', 'Humidity3pm', 'Pressure9am', 'Pressure3pm', 'Cloud9am', 'Cloud3pm',
+           'Temp9am', 'Temp3pm', 'RainToday']
+
+# Calculate the standard deviation for each column
+std_values = data_test[columns].std()
+
+# Print the standard deviation for each column
+print("Standard deviation for each column:")
+print(std_values)
+
+
+# %%
+positive_integers_arr = np.array(positive_integers)
+
+# Calculate the mean
+mean_value = np.mean(positive_integers_arr)
+
+# Calculate the standard deviation
+std_deviation = np.std(positive_integers_arr)
+
+# Print the mean and standard deviation
+print("Mean:", mean_value)
+print("Standard Deviation:", std_deviation)
+
+# %% [markdown]
+# ## ANOVA test
+# The following code block will perform ANOVA on the dataset with 'RainToday' as the dependent variable and the other variables as independent variables. This test will help determine if there are any significant differences in the mean 'RainToday' values across different levels of the independent variables.
+
+# %%
+from scipy import stats
+
+# Extract the variables from the dataset
+MinTemp = data_test['MinTemp']
+MaxTemp = data_test['MaxTemp']
+Rainfall = data_test['Rainfall']
+WindGustSpeed = data_test['WindGustSpeed']
+WindSpeed9am = data_test['WindSpeed9am']
+WindSpeed3pm = data_test['WindSpeed3pm']
+Humidity9am = data_test['Humidity9am']
+Humidity3pm = data_test['Humidity3pm']
+Pressure9am = data_test['Pressure9am']
+Pressure3pm = data_test['Pressure3pm']
+Cloud9am = data_test['Cloud9am']
+Cloud3pm = data_test['Cloud3pm']
+Temp9am = data_test['Temp9am']
+Temp3pm = data_test['Temp3pm']
+RainToday = data_test['RainToday']
+
+# Perform one-way ANOVA
+fvalue, pvalue = stats.f_oneway(MinTemp, MaxTemp, Rainfall, WindGustSpeed, WindSpeed9am, WindSpeed3pm, Humidity9am,
+                                Humidity3pm, Pressure9am, Pressure3pm, Cloud9am, Cloud3pm, Temp9am, Temp3pm)
+
+# Print the results
+print("One-way ANOVA results:")
+print("F-value:", fvalue)
+print("p-value:", pvalue)
+
+# %% [markdown]
+# The f_oneway function from the scipy.stats module is used to perform the one-way ANOVA test. The resulting fvalue is the test statistic, and the pvalue is the associated p-value. Lower p-values indicate a higher likelihood of a significant difference in the mean 'RainToday' values across the independent variables.
+
+# %% [markdown]
+# ## Kruskal's algorithm
+# The following code block will perform Kruskal's algorithm on the dataset with 'RainToday' as the dependent variable and the other variables as independent variables. This non-parametric test is used when the dependent variable is categorical.
+
+# %%
+from scipy import stats
+
+# Extract the variables from the dataset
+MinTemp = data_test['MinTemp']
+MaxTemp = data_test['MaxTemp']
+Rainfall = data_test['Rainfall']
+WindGustSpeed = data_test['WindGustSpeed']
+WindSpeed9am = data_test['WindSpeed9am']
+WindSpeed3pm = data_test['WindSpeed3pm']
+Humidity9am = data_test['Humidity9am']
+Humidity3pm = data_test['Humidity3pm']
+Pressure9am = data_test['Pressure9am']
+Pressure3pm = data_test['Pressure3pm']
+Cloud9am = data_test['Cloud9am']
+Cloud3pm = data_test['Cloud3pm']
+Temp9am = data_test['Temp9am']
+Temp3pm = data_test['Temp3pm']
+RainToday = data_test['RainToday']
+
+# Perform Kruskal-Wallis H test
+hvalue, pvalue = stats.kruskal(MinTemp, MaxTemp, Rainfall, WindGustSpeed, WindSpeed9am, WindSpeed3pm, Humidity9am,
+                               Humidity3pm, Pressure9am, Pressure3pm, Cloud9am, Cloud3pm, Temp9am, Temp3pm)
+
+# Print the results
+print("Kruskal-Wallis H test results:")
+print("H-value:", hvalue)
+print("p-value:", pvalue)
+
+# %% [markdown]
+# The kruskal function from the scipy.stats module is used to perform the Kruskal-Wallis H test. The resulting hvalue is the test statistic, and the pvalue is the associated p-value. Lower p-values indicate a higher likelihood of a significant difference in the 'RainToday' values across the independent variables.
+
+# %% [markdown]
 # ## Models
 
 # %%
@@ -702,118 +845,11 @@ sns.heatmap(CM_dummy, center=True)
 plt.show()
 print('Confusion Matrix is\n', CM_dummy)
 
-# %%
-'''import statistics
- 
-# list of positive integer numbers
-MinTemp = data_test['MinTemp']
-MaxTemp = data_test['MaxTemp']
-Rainfall= data_test['Rainfall']
-WindGustSpeed= data_test['WindGustSpeed']
-WindSpeed9am= data_test['WindSpeed9am']
-WindSpeed3pm= data_test['WindSpeed3pm']
-Humidity9am= data_test['Humidity9am']
-Humidity3pm= data_test['Humidity3pm']
-Pressure9am= data_test['Pressure9am']
-Pressure3pm= data_test['Pressure3pm']
-Cloud9am =  data_test['Cloud9am']     
-Cloud3pm = data_test['Cloud3pm']        
-Temp9am = data_test['Temp9am']         
-Temp3pm = data_test['Temp3pm']
-RainToday = data_test['RainToday']
-
-MinTemp_mean = statistics.mean(MinTemp)
-MaxTemp_mean = statistics.mean(MaxTemp)
-Rainfall_mean = statistics.mean(Rainfall)
-WindGustSpeed_mean = statistics.mean(WindGustSpeed)
-WindSpeed9am_mean = statistics.mean(WindSpeed9am)
-WindSpeed3pm_mean = statistics.mean(WindSpeed3pm)
-Humidity9am_mean = statistics.mean(Humidity9am)
-Humidity3pm_mean = statistics.mean(Humidity3pm)
-Pressure9am_mean = statistics.mean(Pressure9am)
-Pressure3pm_mean = statistics.mean(Pressure3pm)
-Cloud9am_mean  = statistics.mean(Cloud9am)      
-Cloud3pm_mean  = statistics.mean(Cloud3pm)     
-Temp9am_mean   = statistics.mean(Temp9am)      
-Temp3pm_mean = statistics.mean(Temp3pm)
-
- 
-# Printing the mean
-print("MinTemp Mean is :", MinTemp_mean)
-print("MaxTemp Mean is :", MaxTemp_mean)
-print("Rainfall Mean is :", Rainfall_mean)
-print("WindGustSpeed Mean is :", WindGustSpeed_mean)
-print("WindSpeed9am Mean is :", WindSpeed9am_mean)
-print("WindSpeed3pm Mean is :", WindSpeed3pm_mean)
-print("Humidity9am Mean is :", Humidity9am_mean)
-print("Humidity3pm Mean is :", Humidity3pm_mean)
-print("Pressure9am Mean is :", Pressure9am_mean)
-print("Pressure3pm Mean is :", Pressure3pm_mean)
-print("Cloud9am Mean is :", Cloud9am_mean)
-print("Cloud3pm Mean is :", Cloud3pm_mean)
-print("Cloud3pm Mean is :", Cloud3pm_mean)
-print("Temp9am Mean is :", Temp9am_mean)
-print("Temp3pm Mean is :", Temp3pm_mean)
-
-MinTemp_standard_deviation = statistics.stdev(MinTemp)
-MaxTemp_standard_deviation  = statistics.stdev(MaxTemp)
-Rainfall_standard_deviation  = statistics.stdev(Rainfall)
-WindGustSpeed_standard_deviation  = statistics.stdev(WindGustSpeed)
-WindSpeed9am_standard_deviation  = statistics.stdev(WindSpeed9am)
-WindSpeed3pm_standard_deviation  = statistics.stdev(WindSpeed3pm)
-Humidity9am_standard_deviation  = statistics.stdev(Humidity9am)
-Humidity3pm_standard_deviation = statistics.stdev(Humidity3pm)
-Pressure9am_standard_deviation  = statistics.stdev(Pressure9am)
-Pressure3pm_standard_deviation  = statistics.stdev(Pressure3pm)
-Cloud9am_standard_deviation   = statistics.stdev(Cloud9am)      
-Cloud3pm_standard_deviation  = statistics.stdev(Cloud3pm)     
-Temp9am_standard_deviation   = statistics.stdev(Temp9am)      
-Temp3pm_standard_deviation  = statistics.stdev(Temp3pm)
-
-
-print("Standard Deviation of the MaxTemp is % s "%(statistics.stdev(MinTemp)))
-print("Standard Deviation of the MaxTemp is % s "%(statistics.stdev(MaxTemp)))
-print("Standard Deviation of the Rainfall is:", Rainfall_standard_deviation)
-print("Standard Deviation of the WindGustSpeed is:",WindGustSpeed_standard_deviation)
-print("Standard Deviation of the WindSpeed9am is:", WindSpeed9am_standard_deviation)
-print("Standard Deviation of the WindSpeed3pm is:",WindSpeed3pm_standard_deviation)
-print("Standard Deviation of the Humidity9am is:", Humidity9am_standard_deviation)
-print("Standard Deviation of the Humidity3pm is:", Humidity3pm_standard_deviation)
-print("Standard Deviation of the Pressure9am is:",Pressure9am_standard_deviation)
-print("Standard Deviation of the Pressure3pm is:",Pressure3pm_standard_deviation)
-print("Standard Deviation of the Cloud9am is:", Cloud9am_standard_deviation)
-print("Standard Deviation of the Cloud3pm is:", Cloud3pm_standard_deviation)
-print("Standard Deviation of the Temp9am is:", Temp9am_standard_deviation)
-print("Standard Deviation of the Temp3pm is:",Temp3pm_standard_deviation)
-
-import scipy.stats as stats
-
-# stats f_oneway functions takes the groups as input and returns ANOVA F and p value
-fvalue= stats.f_oneway(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])
-pvalue = stats.f_oneway(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])
-
-#print(fvalue, pvalue)
-print("The result of Anova test is:",fvalue)
-print("The result of p vaue is:",pvalue)
-
-#kruskal's test
-result = stats.kruskal(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])
-
-# Print the result
-print(result)
-
-
-import statsmodels.api as sm
-from statsmodels.formula.api import ols
-
-#perform two-way ANOVA
-model = ols('RainToday ~ MinTemp + MaxTemp + Rainfall + WindGustSpeed +WindSpeed9am +WindSpeed3pm +Humidity9am +Humidity3pm +Pressure9am +Pressure3pm +Cloud9am +Cloud3pm +Temp9am +Temp3pm', data=data_test).fit()
-sm.stats.anova_lm(model, typ=2)
-
-model = ols("""height ~ C(program) + C(gender) + C(division) +
-               C(program):C(gender) + C(program):C(division) + C(gender):C(division) +
-               C(program):C(gender):C(division)""", data=df).fit()
-
-sm.stats.anova_lm(model, typ=2)'''
+# %% [markdown]
+# <br><br><br><br>
+# <h3><center>End of Assignment</center></h3>
+# <center><h4>
+# <a href="https://github.com/hemangsharma/Assignmnet2_DSI_36100">Github Link</a>
+# </h4></center>
 
 
