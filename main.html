@@ -14605,11 +14605,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </tr>
 <tr>
 <td>4</td>
-<td>Manal Ydkw</td>
-<td>24980447</td>
-</tr>
-<tr>
-<td>5</td>
 <td>Suyash Santosh Tapase</td>
 <td>24678207</td>
 </tr>
@@ -16226,7 +16221,7 @@ dtype: int64</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/var/folders/df/npmhf4fs0qb8cnwm2kmptxk00000gn/T/ipykernel_63250/1273592041.py:1: FutureWarning:
+<pre>/var/folders/df/npmhf4fs0qb8cnwm2kmptxk00000gn/T/ipykernel_94084/1273592041.py:1: FutureWarning:
 
 The default value of numeric_only in DataFrame.median is deprecated. In a future version, it will default to False. In addition, specifying &#39;numeric_only=None&#39; is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.
 
@@ -19628,6 +19623,58 @@ RandomForestClassifierModel Test Score is :  0.9274235355106273
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">accuracy_score</span>
+
+<span class="c1"># Predict labels for training and test sets</span>
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">RandomForestClassifierModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">RandomForestClassifierModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Calculate F1 score</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'F1 Score:'</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+
+<span class="c1"># Calculate accuracy</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Accuracy:'</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>F1 Score: 0.9293464547060308
+Accuracy: 0.9274235355106273
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
 
@@ -19767,6 +19814,111 @@ class="
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>GBCModel Train Score is :  0.9900923085785055
 GBCModel Test Score is :  0.9331907724209435
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_upsampled</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'RainTomorrow'</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_upsampled</span><span class="p">[</span><span class="s1">'RainTomorrow'</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">44</span><span class="p">)</span>
+
+<span class="n">GradientBoostingClassifierModel</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.07</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">44</span><span class="p">)</span>
+<span class="n">GradientBoostingClassifierModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GradientBoostingClassifier(learning_rate=0.07, max_depth=11, n_estimators=200,
+                           random_state=44)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">GradientBoostingClassifier</label><div class="sk-toggleable__content"><pre>GradientBoostingClassifier(learning_rate=0.07, max_depth=11, n_estimators=200,
+                           random_state=44)</pre></div></div></div></div></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'GBCModel Train Score is : '</span> <span class="p">,</span> <span class="n">GBCModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'GBCModel Test Score is : '</span> <span class="p">,</span> <span class="n">GBCModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="c1"># Predict labels for training and test sets</span>
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">GradientBoostingClassifierModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">GradientBoostingClassifierModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Calculate F1 score</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'F1 Score:'</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+
+<span class="c1"># Calculate accuracy</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Accuracy:'</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>GBCModel Train Score is :  0.9900923085785055
+GBCModel Test Score is :  0.9331907724209435
+F1 Score: 0.93528340970435
+Accuracy: 0.9331907724209435
 </pre>
 </div>
 </div>
@@ -19986,7 +20138,7 @@ class="
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/var/folders/df/npmhf4fs0qb8cnwm2kmptxk00000gn/T/ipykernel_63250/1624392679.py:3: SettingWithCopyWarning:
+<pre>/var/folders/df/npmhf4fs0qb8cnwm2kmptxk00000gn/T/ipykernel_94084/1624392679.py:3: SettingWithCopyWarning:
 
 
 A value is trying to be set on a copy of a slice from a DataFrame.
@@ -20096,14 +20248,14 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Fitting 5 folds for each of 10 candidates, totalling 50 fits
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  20.3s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  20.6s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  20.6s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  20.9s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  21.1s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  21.1s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  21.4s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  21.5s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  19.4s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  19.7s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  19.7s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  20.2s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  20.3s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  20.3s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  20.3s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=5, n_estimators=100; total time=  20.4s
 </pre>
 </div>
 </div>
@@ -20128,8 +20280,89 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.5s
-[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.4s
+<pre>[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  16.9s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  16.9s
+[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  16.9s
+[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  17.0s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  17.2s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  18.5s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  18.4s
 </pre>
 </div>
 </div>
@@ -20156,38 +20389,7 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.5s
-[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.7s
-[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.8s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  20.1s
+<pre>[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  19.1s
 </pre>
 </div>
 </div>
@@ -20212,7 +20414,7 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=4, min_samples_split=10, n_estimators=100; total time=  20.3s
+<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   6.7s
 </pre>
 </div>
 </div>
@@ -20237,158 +20439,8 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  21.0s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   7.3s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   7.3s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   7.3s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   7.3s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   7.3s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  21.0s
-[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  21.0s
+<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   6.6s
+[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   6.6s
 </pre>
 </div>
 </div>
@@ -20415,8 +20467,83 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  21.2s
-[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  21.2s
+<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   6.6s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[CV] END max_depth=5, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=   6.9s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  19.1s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  19.0s
+[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  19.2s
 </pre>
 </div>
 </div>
@@ -20443,7 +20570,7 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.8s
+<pre>[CV] END max_depth=None, max_features=auto, min_samples_leaf=2, min_samples_split=10, n_estimators=100; total time=  19.3s
 </pre>
 </div>
 </div>
@@ -20468,7 +20595,35 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.9s
+<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  17.2s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  17.5s
+[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  17.4s
 </pre>
 </div>
 </div>
@@ -20493,7 +20648,7 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.8s
+<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.2s
 </pre>
 </div>
 </div>
@@ -20518,7 +20673,7 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.7s
+<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  17.8s
 </pre>
 </div>
 </div>
@@ -20543,7 +20698,7 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=15, max_features=auto, min_samples_leaf=1, min_samples_split=5, n_estimators=100; total time=  18.7s
+<pre>[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  24.8s
 </pre>
 </div>
 </div>
@@ -20568,7 +20723,7 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  27.2s
+<pre>[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  24.4s
 </pre>
 </div>
 </div>
@@ -20593,49 +20748,24 @@ This algorithm randomly selects a set of hyperparameters and uses cross-validati
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  27.5s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/hemang/miniconda3/lib/python3.10/site-packages/sklearn/ensemble/_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
-  warn(
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  27.4s
-[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time= 1.0min
-[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  26.8s
-[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time= 1.0min
-[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time= 1.0min
-[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  26.7s
-[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time= 1.0min
-[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time= 1.0min
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  42.1s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  41.9s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  42.1s
-[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  37.2s
-[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  36.9s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  42.2s
-[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  42.0s
-[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  37.2s
-[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  32.1s
-[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  28.3s
+<pre>[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  24.0s
+[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  24.1s
+[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time=  56.8s
+[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time=  57.1s
+[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time=  57.1s
+[CV] END max_depth=10, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=200; total time=  24.4s
+[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time=  56.8s
+[CV] END max_depth=None, max_features=auto, min_samples_leaf=4, min_samples_split=2, n_estimators=300; total time=  56.6s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  38.0s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  37.7s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  37.9s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  38.1s
+[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  33.3s
+[CV] END max_depth=None, max_features=sqrt, min_samples_leaf=2, min_samples_split=10, n_estimators=200; total time=  37.8s
+[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  33.7s
+[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  33.7s
+[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  30.0s
+[CV] END max_depth=15, max_features=sqrt, min_samples_leaf=1, min_samples_split=5, n_estimators=200; total time=  26.7s
 Best Hyperparameters: {&#39;n_estimators&#39;: 100, &#39;min_samples_split&#39;: 5, &#39;min_samples_leaf&#39;: 2, &#39;max_features&#39;: &#39;sqrt&#39;, &#39;max_depth&#39;: None}
 Best Accuracy Score: 0.9268227680017898
 Test Accuracy Score: 0.9444660445826853
@@ -20804,6 +20934,18 @@ class="
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The DummyClassifier in scikit-learn does not require explicit training or fitting since it employs simple rules for prediction based on the specified strategy. The strategy='most_frequent' strategy used in your code instructs the DummyClassifier to always predict the most frequent class in the training data. Hence, the model does not learn from the data during training.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>DummyClassifier from scikit-learn, which provides a simple strategy for generating predictions.</p>
 
 </div>
@@ -20817,8 +20959,11 @@ class="
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import DummyClassifier</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import necessary modules</span>
 <span class="kn">from</span> <span class="nn">sklearn.dummy</span> <span class="kn">import</span> <span class="n">DummyClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># create a new instance of the classifier</span>
 <span class="n">dummy</span> <span class="o">=</span> <span class="n">DummyClassifier</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">'most_frequent'</span><span class="p">)</span>
@@ -20830,7 +20975,7 @@ class="
 <span class="n">y_pred_dummy</span> <span class="o">=</span> <span class="n">dummy</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
 <span class="c1"># evaluate the model</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'DummyClassifier Test Score is : '</span> <span class="p">,</span> <span class="n">dummy</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'DummyClassifier Test Score is : '</span><span class="p">,</span> <span class="n">dummy</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 
 <span class="c1"># calculate and print the confusion matrix</span>
 <span class="n">CM_dummy</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_dummy</span><span class="p">)</span>
@@ -20892,6 +21037,158 @@ class="
  [7723    0]]
 </pre>
 </div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">'''import statistics</span>
+<span class="sd"> </span>
+<span class="sd"># list of positive integer numbers</span>
+<span class="sd">MinTemp = data_test['MinTemp']</span>
+<span class="sd">MaxTemp = data_test['MaxTemp']</span>
+<span class="sd">Rainfall= data_test['Rainfall']</span>
+<span class="sd">WindGustSpeed= data_test['WindGustSpeed']</span>
+<span class="sd">WindSpeed9am= data_test['WindSpeed9am']</span>
+<span class="sd">WindSpeed3pm= data_test['WindSpeed3pm']</span>
+<span class="sd">Humidity9am= data_test['Humidity9am']</span>
+<span class="sd">Humidity3pm= data_test['Humidity3pm']</span>
+<span class="sd">Pressure9am= data_test['Pressure9am']</span>
+<span class="sd">Pressure3pm= data_test['Pressure3pm']</span>
+<span class="sd">Cloud9am =  data_test['Cloud9am']     </span>
+<span class="sd">Cloud3pm = data_test['Cloud3pm']        </span>
+<span class="sd">Temp9am = data_test['Temp9am']         </span>
+<span class="sd">Temp3pm = data_test['Temp3pm']</span>
+<span class="sd">RainToday = data_test['RainToday']</span>
+
+<span class="sd">MinTemp_mean = statistics.mean(MinTemp)</span>
+<span class="sd">MaxTemp_mean = statistics.mean(MaxTemp)</span>
+<span class="sd">Rainfall_mean = statistics.mean(Rainfall)</span>
+<span class="sd">WindGustSpeed_mean = statistics.mean(WindGustSpeed)</span>
+<span class="sd">WindSpeed9am_mean = statistics.mean(WindSpeed9am)</span>
+<span class="sd">WindSpeed3pm_mean = statistics.mean(WindSpeed3pm)</span>
+<span class="sd">Humidity9am_mean = statistics.mean(Humidity9am)</span>
+<span class="sd">Humidity3pm_mean = statistics.mean(Humidity3pm)</span>
+<span class="sd">Pressure9am_mean = statistics.mean(Pressure9am)</span>
+<span class="sd">Pressure3pm_mean = statistics.mean(Pressure3pm)</span>
+<span class="sd">Cloud9am_mean  = statistics.mean(Cloud9am)      </span>
+<span class="sd">Cloud3pm_mean  = statistics.mean(Cloud3pm)     </span>
+<span class="sd">Temp9am_mean   = statistics.mean(Temp9am)      </span>
+<span class="sd">Temp3pm_mean = statistics.mean(Temp3pm)</span>
+
+<span class="sd"> </span>
+<span class="sd"># Printing the mean</span>
+<span class="sd">print("MinTemp Mean is :", MinTemp_mean)</span>
+<span class="sd">print("MaxTemp Mean is :", MaxTemp_mean)</span>
+<span class="sd">print("Rainfall Mean is :", Rainfall_mean)</span>
+<span class="sd">print("WindGustSpeed Mean is :", WindGustSpeed_mean)</span>
+<span class="sd">print("WindSpeed9am Mean is :", WindSpeed9am_mean)</span>
+<span class="sd">print("WindSpeed3pm Mean is :", WindSpeed3pm_mean)</span>
+<span class="sd">print("Humidity9am Mean is :", Humidity9am_mean)</span>
+<span class="sd">print("Humidity3pm Mean is :", Humidity3pm_mean)</span>
+<span class="sd">print("Pressure9am Mean is :", Pressure9am_mean)</span>
+<span class="sd">print("Pressure3pm Mean is :", Pressure3pm_mean)</span>
+<span class="sd">print("Cloud9am Mean is :", Cloud9am_mean)</span>
+<span class="sd">print("Cloud3pm Mean is :", Cloud3pm_mean)</span>
+<span class="sd">print("Cloud3pm Mean is :", Cloud3pm_mean)</span>
+<span class="sd">print("Temp9am Mean is :", Temp9am_mean)</span>
+<span class="sd">print("Temp3pm Mean is :", Temp3pm_mean)</span>
+
+<span class="sd">MinTemp_standard_deviation = statistics.stdev(MinTemp)</span>
+<span class="sd">MaxTemp_standard_deviation  = statistics.stdev(MaxTemp)</span>
+<span class="sd">Rainfall_standard_deviation  = statistics.stdev(Rainfall)</span>
+<span class="sd">WindGustSpeed_standard_deviation  = statistics.stdev(WindGustSpeed)</span>
+<span class="sd">WindSpeed9am_standard_deviation  = statistics.stdev(WindSpeed9am)</span>
+<span class="sd">WindSpeed3pm_standard_deviation  = statistics.stdev(WindSpeed3pm)</span>
+<span class="sd">Humidity9am_standard_deviation  = statistics.stdev(Humidity9am)</span>
+<span class="sd">Humidity3pm_standard_deviation = statistics.stdev(Humidity3pm)</span>
+<span class="sd">Pressure9am_standard_deviation  = statistics.stdev(Pressure9am)</span>
+<span class="sd">Pressure3pm_standard_deviation  = statistics.stdev(Pressure3pm)</span>
+<span class="sd">Cloud9am_standard_deviation   = statistics.stdev(Cloud9am)      </span>
+<span class="sd">Cloud3pm_standard_deviation  = statistics.stdev(Cloud3pm)     </span>
+<span class="sd">Temp9am_standard_deviation   = statistics.stdev(Temp9am)      </span>
+<span class="sd">Temp3pm_standard_deviation  = statistics.stdev(Temp3pm)</span>
+
+
+<span class="sd">print("Standard Deviation of the MaxTemp is % s "%(statistics.stdev(MinTemp)))</span>
+<span class="sd">print("Standard Deviation of the MaxTemp is % s "%(statistics.stdev(MaxTemp)))</span>
+<span class="sd">print("Standard Deviation of the Rainfall is:", Rainfall_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the WindGustSpeed is:",WindGustSpeed_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the WindSpeed9am is:", WindSpeed9am_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the WindSpeed3pm is:",WindSpeed3pm_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the Humidity9am is:", Humidity9am_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the Humidity3pm is:", Humidity3pm_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the Pressure9am is:",Pressure9am_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the Pressure3pm is:",Pressure3pm_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the Cloud9am is:", Cloud9am_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the Cloud3pm is:", Cloud3pm_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the Temp9am is:", Temp9am_standard_deviation)</span>
+<span class="sd">print("Standard Deviation of the Temp3pm is:",Temp3pm_standard_deviation)</span>
+
+<span class="sd">import scipy.stats as stats</span>
+
+<span class="sd"># stats f_oneway functions takes the groups as input and returns ANOVA F and p value</span>
+<span class="sd">fvalue= stats.f_oneway(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])</span>
+<span class="sd">pvalue = stats.f_oneway(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])</span>
+
+<span class="sd">#print(fvalue, pvalue)</span>
+<span class="sd">print("The result of Anova test is:",fvalue)</span>
+<span class="sd">print("The result of p vaue is:",pvalue)</span>
+
+<span class="sd">#kruskal's test</span>
+<span class="sd">result = stats.kruskal(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])</span>
+
+<span class="sd"># Print the result</span>
+<span class="sd">print(result)</span>
+
+
+<span class="sd">import statsmodels.api as sm</span>
+<span class="sd">from statsmodels.formula.api import ols</span>
+
+<span class="sd">#perform two-way ANOVA</span>
+<span class="sd">model = ols('RainToday ~ MinTemp + MaxTemp + Rainfall + WindGustSpeed +WindSpeed9am +WindSpeed3pm +Humidity9am +Humidity3pm +Pressure9am +Pressure3pm +Cloud9am +Cloud3pm +Temp9am +Temp3pm', data=data_test).fit()</span>
+<span class="sd">sm.stats.anova_lm(model, typ=2)</span>
+
+<span class="sd">model = ols("""height ~ C(program) + C(gender) + C(division) +</span>
+<span class="sd">               C(program):C(gender) + C(program):C(division) + C(gender):C(division) +</span>
+<span class="sd">               C(program):C(gender):C(division)""", data=df).fit()</span>
+
+<span class="sd">sm.stats.anova_lm(model, typ=2)'''</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;import statistics\n \n# list of positive integer numbers\nMinTemp = data_test[\&#39;MinTemp\&#39;]\nMaxTemp = data_test[\&#39;MaxTemp\&#39;]\nRainfall= data_test[\&#39;Rainfall\&#39;]\nWindGustSpeed= data_test[\&#39;WindGustSpeed\&#39;]\nWindSpeed9am= data_test[\&#39;WindSpeed9am\&#39;]\nWindSpeed3pm= data_test[\&#39;WindSpeed3pm\&#39;]\nHumidity9am= data_test[\&#39;Humidity9am\&#39;]\nHumidity3pm= data_test[\&#39;Humidity3pm\&#39;]\nPressure9am= data_test[\&#39;Pressure9am\&#39;]\nPressure3pm= data_test[\&#39;Pressure3pm\&#39;]\nCloud9am =  data_test[\&#39;Cloud9am\&#39;]     \nCloud3pm = data_test[\&#39;Cloud3pm\&#39;]        \nTemp9am = data_test[\&#39;Temp9am\&#39;]         \nTemp3pm = data_test[\&#39;Temp3pm\&#39;]\nRainToday = data_test[\&#39;RainToday\&#39;]\n\nMinTemp_mean = statistics.mean(MinTemp)\nMaxTemp_mean = statistics.mean(MaxTemp)\nRainfall_mean = statistics.mean(Rainfall)\nWindGustSpeed_mean = statistics.mean(WindGustSpeed)\nWindSpeed9am_mean = statistics.mean(WindSpeed9am)\nWindSpeed3pm_mean = statistics.mean(WindSpeed3pm)\nHumidity9am_mean = statistics.mean(Humidity9am)\nHumidity3pm_mean = statistics.mean(Humidity3pm)\nPressure9am_mean = statistics.mean(Pressure9am)\nPressure3pm_mean = statistics.mean(Pressure3pm)\nCloud9am_mean  = statistics.mean(Cloud9am)      \nCloud3pm_mean  = statistics.mean(Cloud3pm)     \nTemp9am_mean   = statistics.mean(Temp9am)      \nTemp3pm_mean = statistics.mean(Temp3pm)\n\n \n# Printing the mean\nprint(&#34;MinTemp Mean is :&#34;, MinTemp_mean)\nprint(&#34;MaxTemp Mean is :&#34;, MaxTemp_mean)\nprint(&#34;Rainfall Mean is :&#34;, Rainfall_mean)\nprint(&#34;WindGustSpeed Mean is :&#34;, WindGustSpeed_mean)\nprint(&#34;WindSpeed9am Mean is :&#34;, WindSpeed9am_mean)\nprint(&#34;WindSpeed3pm Mean is :&#34;, WindSpeed3pm_mean)\nprint(&#34;Humidity9am Mean is :&#34;, Humidity9am_mean)\nprint(&#34;Humidity3pm Mean is :&#34;, Humidity3pm_mean)\nprint(&#34;Pressure9am Mean is :&#34;, Pressure9am_mean)\nprint(&#34;Pressure3pm Mean is :&#34;, Pressure3pm_mean)\nprint(&#34;Cloud9am Mean is :&#34;, Cloud9am_mean)\nprint(&#34;Cloud3pm Mean is :&#34;, Cloud3pm_mean)\nprint(&#34;Cloud3pm Mean is :&#34;, Cloud3pm_mean)\nprint(&#34;Temp9am Mean is :&#34;, Temp9am_mean)\nprint(&#34;Temp3pm Mean is :&#34;, Temp3pm_mean)\n\nMinTemp_standard_deviation = statistics.stdev(MinTemp)\nMaxTemp_standard_deviation  = statistics.stdev(MaxTemp)\nRainfall_standard_deviation  = statistics.stdev(Rainfall)\nWindGustSpeed_standard_deviation  = statistics.stdev(WindGustSpeed)\nWindSpeed9am_standard_deviation  = statistics.stdev(WindSpeed9am)\nWindSpeed3pm_standard_deviation  = statistics.stdev(WindSpeed3pm)\nHumidity9am_standard_deviation  = statistics.stdev(Humidity9am)\nHumidity3pm_standard_deviation = statistics.stdev(Humidity3pm)\nPressure9am_standard_deviation  = statistics.stdev(Pressure9am)\nPressure3pm_standard_deviation  = statistics.stdev(Pressure3pm)\nCloud9am_standard_deviation   = statistics.stdev(Cloud9am)      \nCloud3pm_standard_deviation  = statistics.stdev(Cloud3pm)     \nTemp9am_standard_deviation   = statistics.stdev(Temp9am)      \nTemp3pm_standard_deviation  = statistics.stdev(Temp3pm)\n\n\nprint(&#34;Standard Deviation of the MaxTemp is % s &#34;%(statistics.stdev(MinTemp)))\nprint(&#34;Standard Deviation of the MaxTemp is % s &#34;%(statistics.stdev(MaxTemp)))\nprint(&#34;Standard Deviation of the Rainfall is:&#34;, Rainfall_standard_deviation)\nprint(&#34;Standard Deviation of the WindGustSpeed is:&#34;,WindGustSpeed_standard_deviation)\nprint(&#34;Standard Deviation of the WindSpeed9am is:&#34;, WindSpeed9am_standard_deviation)\nprint(&#34;Standard Deviation of the WindSpeed3pm is:&#34;,WindSpeed3pm_standard_deviation)\nprint(&#34;Standard Deviation of the Humidity9am is:&#34;, Humidity9am_standard_deviation)\nprint(&#34;Standard Deviation of the Humidity3pm is:&#34;, Humidity3pm_standard_deviation)\nprint(&#34;Standard Deviation of the Pressure9am is:&#34;,Pressure9am_standard_deviation)\nprint(&#34;Standard Deviation of the Pressure3pm is:&#34;,Pressure3pm_standard_deviation)\nprint(&#34;Standard Deviation of the Cloud9am is:&#34;, Cloud9am_standard_deviation)\nprint(&#34;Standard Deviation of the Cloud3pm is:&#34;, Cloud3pm_standard_deviation)\nprint(&#34;Standard Deviation of the Temp9am is:&#34;, Temp9am_standard_deviation)\nprint(&#34;Standard Deviation of the Temp3pm is:&#34;,Temp3pm_standard_deviation)\n\nimport scipy.stats as stats\n\n# stats f_oneway functions takes the groups as input and returns ANOVA F and p value\nfvalue= stats.f_oneway(data_test[\&#39;MinTemp\&#39;], data_test[\&#39;MaxTemp\&#39;],data_test[\&#39;Rainfall\&#39;], data_test[\&#39;WindGustSpeed\&#39;],data_test[\&#39;WindSpeed9am\&#39;],data_test[\&#39;WindSpeed3pm\&#39;],data_test[\&#39;Humidity9am\&#39;],data_test[\&#39;Humidity3pm\&#39;],data_test[\&#39;Pressure9am\&#39;],data_test[\&#39;Pressure3pm\&#39;],data_test[\&#39;Cloud9am\&#39;],data_test[\&#39;Cloud3pm\&#39;], data_test[\&#39;Temp9am\&#39;],data_test[\&#39;Temp3pm\&#39;])\npvalue = stats.f_oneway(data_test[\&#39;MinTemp\&#39;], data_test[\&#39;MaxTemp\&#39;],data_test[\&#39;Rainfall\&#39;], data_test[\&#39;WindGustSpeed\&#39;],data_test[\&#39;WindSpeed9am\&#39;],data_test[\&#39;WindSpeed3pm\&#39;],data_test[\&#39;Humidity9am\&#39;],data_test[\&#39;Humidity3pm\&#39;],data_test[\&#39;Pressure9am\&#39;],data_test[\&#39;Pressure3pm\&#39;],data_test[\&#39;Cloud9am\&#39;],data_test[\&#39;Cloud3pm\&#39;], data_test[\&#39;Temp9am\&#39;],data_test[\&#39;Temp3pm\&#39;])\n\n#print(fvalue, pvalue)\nprint(&#34;The result of Anova test is:&#34;,fvalue)\nprint(&#34;The result of p vaue is:&#34;,pvalue)\n\n#kruskal\&#39;s test\nresult = stats.kruskal(data_test[\&#39;MinTemp\&#39;], data_test[\&#39;MaxTemp\&#39;],data_test[\&#39;Rainfall\&#39;], data_test[\&#39;WindGustSpeed\&#39;],data_test[\&#39;WindSpeed9am\&#39;],data_test[\&#39;WindSpeed3pm\&#39;],data_test[\&#39;Humidity9am\&#39;],data_test[\&#39;Humidity3pm\&#39;],data_test[\&#39;Pressure9am\&#39;],data_test[\&#39;Pressure3pm\&#39;],data_test[\&#39;Cloud9am\&#39;],data_test[\&#39;Cloud3pm\&#39;], data_test[\&#39;Temp9am\&#39;],data_test[\&#39;Temp3pm\&#39;])\n\n# Print the result\nprint(result)\n\n\nimport statsmodels.api as sm\nfrom statsmodels.formula.api import ols\n\n#perform two-way ANOVA\nmodel = ols(\&#39;RainToday ~ MinTemp + MaxTemp + Rainfall + WindGustSpeed +WindSpeed9am +WindSpeed3pm +Humidity9am +Humidity3pm +Pressure9am +Pressure3pm +Cloud9am +Cloud3pm +Temp9am +Temp3pm\&#39;, data=data_test).fit()\nsm.stats.anova_lm(model, typ=2)\n\nmodel = ols(&#34;&#34;&#34;height ~ C(program) + C(gender) + C(division) +\n               C(program):C(gender) + C(program):C(division) + C(gender):C(division) +\n               C(program):C(gender):C(division)&#34;&#34;&#34;, data=df).fit()\n\nsm.stats.anova_lm(model, typ=2)&#39;</pre>
+</div>
+
 </div>
 
 </div>

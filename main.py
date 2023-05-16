@@ -13,8 +13,7 @@
 # |  1 | Hemang Sharma | 24695785 |
 # |  2 |  Jyoti Khurana| 14075648 |
 # |  3 | Mahjabeen Mohiuddin | 24610507 |
-# |  4 | Manal Ydkw | 24980447 |
-# |  5 | Suyash Santosh Tapase | 24678207 |
+# |  4 | Suyash Santosh Tapase | 24678207 |
 # 
 # 
 # ## Library used 
@@ -505,6 +504,21 @@ print('RandomForestClassifierModel Train Score is : ' , RandomForestClassifierMo
 print('RandomForestClassifierModel Test Score is : ' , RandomForestClassifierModel.score(X_test, y_test))
 
 # %%
+from sklearn.metrics import f1_score, accuracy_score
+
+# Predict labels for training and test sets
+y_train_pred = RandomForestClassifierModel.predict(X_train)
+y_test_pred = RandomForestClassifierModel.predict(X_test)
+
+# Calculate F1 score
+f1 = f1_score(y_test, y_test_pred)
+print('F1 Score:', f1)
+
+# Calculate accuracy
+accuracy = accuracy_score(y_test, y_test_pred)
+print('Accuracy:', accuracy)
+
+# %%
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 
@@ -529,6 +543,34 @@ GBCModel = GradientBoostingClassifier(n_estimators=200, max_depth=11, learning_r
 GBCModel.fit(X_train, y_train)
 print('GBCModel Train Score is : ' , GBCModel.score(X_train, y_train))
 print('GBCModel Test Score is : ' , GBCModel.score(X_test, y_test))
+
+# %%
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import f1_score, accuracy_score
+from sklearn.model_selection import train_test_split
+
+X = df_upsampled.drop(columns='RainTomorrow')
+y = df_upsampled['RainTomorrow']
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.9, shuffle=True, random_state=44)
+
+GradientBoostingClassifierModel = GradientBoostingClassifier(n_estimators=200, max_depth=11, learning_rate=0.07, random_state=44)
+GradientBoostingClassifierModel.fit(X_train, y_train)
+
+# %%
+print('GBCModel Train Score is : ' , GBCModel.score(X_train, y_train))
+print('GBCModel Test Score is : ' , GBCModel.score(X_test, y_test))
+# Predict labels for training and test sets
+y_train_pred = GradientBoostingClassifierModel.predict(X_train)
+y_test_pred = GradientBoostingClassifierModel.predict(X_test)
+
+# Calculate F1 score
+f1 = f1_score(y_test, y_test_pred)
+print('F1 Score:', f1)
+
+# Calculate accuracy
+accuracy = accuracy_score(y_test, y_test_pred)
+print('Accuracy:', accuracy)
+
 
 # %%
 joblib.dump(GBCModel, 'GBCModel.joblib')
@@ -630,11 +672,17 @@ joblib.dump(gbc, 'gbc.joblib')
 print(fpr, tpr)
 
 # %% [markdown]
+# The DummyClassifier in scikit-learn does not require explicit training or fitting since it employs simple rules for prediction based on the specified strategy. The strategy='most_frequent' strategy used in your code instructs the DummyClassifier to always predict the most frequent class in the training data. Hence, the model does not learn from the data during training.
+
+# %% [markdown]
 # DummyClassifier from scikit-learn, which provides a simple strategy for generating predictions.
 
 # %%
-# import DummyClassifier
+# import necessary modules
 from sklearn.dummy import DummyClassifier
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # create a new instance of the classifier
 dummy = DummyClassifier(strategy='most_frequent')
@@ -646,7 +694,7 @@ dummy.fit(X_train, y_train)
 y_pred_dummy = dummy.predict(X_test)
 
 # evaluate the model
-print('DummyClassifier Test Score is : ' , dummy.score(X_test, y_test))
+print('DummyClassifier Test Score is : ', dummy.score(X_test, y_test))
 
 # calculate and print the confusion matrix
 CM_dummy = confusion_matrix(y_test, y_pred_dummy)
@@ -654,5 +702,118 @@ sns.heatmap(CM_dummy, center=True)
 plt.show()
 print('Confusion Matrix is\n', CM_dummy)
 
+# %%
+'''import statistics
+ 
+# list of positive integer numbers
+MinTemp = data_test['MinTemp']
+MaxTemp = data_test['MaxTemp']
+Rainfall= data_test['Rainfall']
+WindGustSpeed= data_test['WindGustSpeed']
+WindSpeed9am= data_test['WindSpeed9am']
+WindSpeed3pm= data_test['WindSpeed3pm']
+Humidity9am= data_test['Humidity9am']
+Humidity3pm= data_test['Humidity3pm']
+Pressure9am= data_test['Pressure9am']
+Pressure3pm= data_test['Pressure3pm']
+Cloud9am =  data_test['Cloud9am']     
+Cloud3pm = data_test['Cloud3pm']        
+Temp9am = data_test['Temp9am']         
+Temp3pm = data_test['Temp3pm']
+RainToday = data_test['RainToday']
+
+MinTemp_mean = statistics.mean(MinTemp)
+MaxTemp_mean = statistics.mean(MaxTemp)
+Rainfall_mean = statistics.mean(Rainfall)
+WindGustSpeed_mean = statistics.mean(WindGustSpeed)
+WindSpeed9am_mean = statistics.mean(WindSpeed9am)
+WindSpeed3pm_mean = statistics.mean(WindSpeed3pm)
+Humidity9am_mean = statistics.mean(Humidity9am)
+Humidity3pm_mean = statistics.mean(Humidity3pm)
+Pressure9am_mean = statistics.mean(Pressure9am)
+Pressure3pm_mean = statistics.mean(Pressure3pm)
+Cloud9am_mean  = statistics.mean(Cloud9am)      
+Cloud3pm_mean  = statistics.mean(Cloud3pm)     
+Temp9am_mean   = statistics.mean(Temp9am)      
+Temp3pm_mean = statistics.mean(Temp3pm)
+
+ 
+# Printing the mean
+print("MinTemp Mean is :", MinTemp_mean)
+print("MaxTemp Mean is :", MaxTemp_mean)
+print("Rainfall Mean is :", Rainfall_mean)
+print("WindGustSpeed Mean is :", WindGustSpeed_mean)
+print("WindSpeed9am Mean is :", WindSpeed9am_mean)
+print("WindSpeed3pm Mean is :", WindSpeed3pm_mean)
+print("Humidity9am Mean is :", Humidity9am_mean)
+print("Humidity3pm Mean is :", Humidity3pm_mean)
+print("Pressure9am Mean is :", Pressure9am_mean)
+print("Pressure3pm Mean is :", Pressure3pm_mean)
+print("Cloud9am Mean is :", Cloud9am_mean)
+print("Cloud3pm Mean is :", Cloud3pm_mean)
+print("Cloud3pm Mean is :", Cloud3pm_mean)
+print("Temp9am Mean is :", Temp9am_mean)
+print("Temp3pm Mean is :", Temp3pm_mean)
+
+MinTemp_standard_deviation = statistics.stdev(MinTemp)
+MaxTemp_standard_deviation  = statistics.stdev(MaxTemp)
+Rainfall_standard_deviation  = statistics.stdev(Rainfall)
+WindGustSpeed_standard_deviation  = statistics.stdev(WindGustSpeed)
+WindSpeed9am_standard_deviation  = statistics.stdev(WindSpeed9am)
+WindSpeed3pm_standard_deviation  = statistics.stdev(WindSpeed3pm)
+Humidity9am_standard_deviation  = statistics.stdev(Humidity9am)
+Humidity3pm_standard_deviation = statistics.stdev(Humidity3pm)
+Pressure9am_standard_deviation  = statistics.stdev(Pressure9am)
+Pressure3pm_standard_deviation  = statistics.stdev(Pressure3pm)
+Cloud9am_standard_deviation   = statistics.stdev(Cloud9am)      
+Cloud3pm_standard_deviation  = statistics.stdev(Cloud3pm)     
+Temp9am_standard_deviation   = statistics.stdev(Temp9am)      
+Temp3pm_standard_deviation  = statistics.stdev(Temp3pm)
+
+
+print("Standard Deviation of the MaxTemp is % s "%(statistics.stdev(MinTemp)))
+print("Standard Deviation of the MaxTemp is % s "%(statistics.stdev(MaxTemp)))
+print("Standard Deviation of the Rainfall is:", Rainfall_standard_deviation)
+print("Standard Deviation of the WindGustSpeed is:",WindGustSpeed_standard_deviation)
+print("Standard Deviation of the WindSpeed9am is:", WindSpeed9am_standard_deviation)
+print("Standard Deviation of the WindSpeed3pm is:",WindSpeed3pm_standard_deviation)
+print("Standard Deviation of the Humidity9am is:", Humidity9am_standard_deviation)
+print("Standard Deviation of the Humidity3pm is:", Humidity3pm_standard_deviation)
+print("Standard Deviation of the Pressure9am is:",Pressure9am_standard_deviation)
+print("Standard Deviation of the Pressure3pm is:",Pressure3pm_standard_deviation)
+print("Standard Deviation of the Cloud9am is:", Cloud9am_standard_deviation)
+print("Standard Deviation of the Cloud3pm is:", Cloud3pm_standard_deviation)
+print("Standard Deviation of the Temp9am is:", Temp9am_standard_deviation)
+print("Standard Deviation of the Temp3pm is:",Temp3pm_standard_deviation)
+
+import scipy.stats as stats
+
+# stats f_oneway functions takes the groups as input and returns ANOVA F and p value
+fvalue= stats.f_oneway(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])
+pvalue = stats.f_oneway(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])
+
+#print(fvalue, pvalue)
+print("The result of Anova test is:",fvalue)
+print("The result of p vaue is:",pvalue)
+
+#kruskal's test
+result = stats.kruskal(data_test['MinTemp'], data_test['MaxTemp'],data_test['Rainfall'], data_test['WindGustSpeed'],data_test['WindSpeed9am'],data_test['WindSpeed3pm'],data_test['Humidity9am'],data_test['Humidity3pm'],data_test['Pressure9am'],data_test['Pressure3pm'],data_test['Cloud9am'],data_test['Cloud3pm'], data_test['Temp9am'],data_test['Temp3pm'])
+
+# Print the result
+print(result)
+
+
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+#perform two-way ANOVA
+model = ols('RainToday ~ MinTemp + MaxTemp + Rainfall + WindGustSpeed +WindSpeed9am +WindSpeed3pm +Humidity9am +Humidity3pm +Pressure9am +Pressure3pm +Cloud9am +Cloud3pm +Temp9am +Temp3pm', data=data_test).fit()
+sm.stats.anova_lm(model, typ=2)
+
+model = ols("""height ~ C(program) + C(gender) + C(division) +
+               C(program):C(gender) + C(program):C(division) + C(gender):C(division) +
+               C(program):C(gender):C(division)""", data=df).fit()
+
+sm.stats.anova_lm(model, typ=2)'''
 
 
