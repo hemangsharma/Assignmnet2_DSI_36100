@@ -6,7 +6,7 @@
 # The objective of this project is develop a predictive classifier to predict the next-day rain on the target variable RainTomorrow
 # 
 # ## Group Members
-# 
+# <center>
 # 
 # | S.No. | Name | Student ID |
 # | --- | --- | --- |
@@ -15,6 +15,7 @@
 # |  3 | Mahjabeen Mohiuddin | 24610507 |
 # |  4 | Suyash Santosh Tapase | 24678207 |
 # 
+# </center>
 # 
 # ## Library used 
 # 
@@ -87,7 +88,7 @@ from sklearn.metrics import confusion_matrix
 # Cloud3pm - Cloud-obscured portions of the sky at 3 pm. (eighths)<br>
 # Temp9am - The temperature at 9 am. (degree Celsius)<br>
 # Temp3pm - The temperature at 3 pm. (degree Celsius)<br>
-# RainToday - If today is rainy then ‘Yes’. If today is not rainy then ‘No’.
+# RainToday - If today is rainy then ‘Yes’. If today is not rainy then ‘No’.<br>
 # RainTomorrow - This is will be the variable containing value of "if tomorrow is rainy then 1 (Yes) or if tomorrow is not rainy then 0 (No)"<br>
 
 # %%
@@ -123,6 +124,13 @@ cleaner = ColumnTransformer([
 data_test[categorical] = cleaner.fit_transform(data_test[categorical])
 null_columns=data_test.columns[data_test.isnull().any()]
 data_test[null_columns].isnull().sum()
+
+# %%
+# Remove rows with missing data
+data_test_clean = data_test.dropna()
+# Print the cleaned dataset
+print("Cleaned dataset:")
+print(data_test_clean)
 
 # %% [markdown]
 # # Data Analysis
@@ -180,13 +188,6 @@ for col in df.columns:
 
 df
 
-
-# %%
-'''objects = df.select_dtypes(include = "object").columns
-for i in range(len(objects)):
-    df[objects[i]] = LabelEncoder().fit_transform(df[objects[i]])
-
-df'''
 
 # %%
 train = df.iloc[:99516,:]
@@ -256,7 +257,7 @@ plt.show()
 # On the other hand, the maximum temperature range from -4.1 ℃ to 48.1 ℃ and the maximum temperature of 20 ℃ has the highest frequency in the data set.
 
 # %%
-sns.displot(data_test, x="WindGustSpeed", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="WindGustSpeed", hue='RainToday', kde=True)
 plt.title("Wind Gust Distribution", fontsize = 14)
 plt.show()
 
@@ -264,7 +265,7 @@ plt.show()
 # During the analysis, it was found that the range of gusts was from 6 main points to 135 main points and 39.98 main points of gusts had the highest frequency in the data set.
 
 # %%
-sns.displot(data_test, x="Humidity9am", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="Humidity9am", hue='RainToday', kde=True)
 plt.title("Humidity at 9am Distribution", fontsize = 14)
 plt.show()
 
@@ -272,7 +273,7 @@ plt.show()
 # During the analysis, it was found that the range of air humidity at 9 o'clock in the morning. and at 3:00 p.m. from 0% to 100% and 99% humidity at 9:00 am. has the highest frequency in the data set.
 
 # %%
-sns.displot(data_test, x="Humidity3pm", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="Humidity3pm", hue='RainToday', kde=True)
 plt.title("Humidity at 3pm Distribution", fontsize = 14)
 plt.show()
 
@@ -280,7 +281,7 @@ plt.show()
 # On the other hand, 54.43% of humidity at 3 pm has the highest frequency in the dataset.
 
 # %%
-sns.displot(data_test, x="Pressure9am", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="Pressure9am", hue='RainToday', kde=True)
 plt.title("Pressure at 9am Distribution", fontsize = 14)
 plt.show()
 
@@ -288,7 +289,7 @@ plt.show()
 # During the analysis, it was found that the range of wind pressure at 9 am. ranges from 980.5 hPa to 1042 hPa, and the pressure of 1017.68 hPa has the highest frequency in the data set.
 
 # %%
-sns.displot(data_test, x="Pressure3pm", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="Pressure3pm", hue='RainToday', kde=True)
 plt.title("Pressure at 3pm Distribution", fontsize = 14)
 plt.show()
 
@@ -296,7 +297,7 @@ plt.show()
 # On the opposite hand, the variety of strain at three pm is from 978.2 hPa to 1039.6 hPa and 1015.28 hPa of strain has the very best frequency withinside the dataset.
 
 # %%
-sns.displot(data_test, x="Cloud9am", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="Cloud9am", hue='RainToday', kde=True)
 plt.title("Cloud at 9am Distribution", fontsize = 14)
 plt.show()
 
@@ -304,7 +305,7 @@ plt.show()
 # During the analysis, it's been determined that the variety of cloud at 9 am and 3 pm is from zero eighths to nine eighths and 4.44 eighths of cloud at nine am has the best frequency withinside the dataset.
 
 # %%
-sns.displot(data_test, x="Cloud3pm", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="Cloud3pm", hue='RainToday', kde=True)
 plt.title("Cloud at 3pm Distribution", fontsize = 14)
 plt.show()
 
@@ -312,7 +313,7 @@ plt.show()
 # On the other hand, 4.52 eighths of cloud at 3 pm has the highest frequency in the dataset.
 
 # %%
-sns.displot(data_test, x="Temp9am", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="Temp9am", hue='RainToday', kde=True)
 plt.title("Temperature at 9am Distribution", fontsize = 14)
 plt.show()
 
@@ -320,7 +321,7 @@ plt.show()
 # During the analysis, it has been found that the range of wind temperature at 9 am is from -7 ℃ to 40.2 ℃ and 17 ℃ of temperature has the highest frequency in the dataset.
 
 # %%
-sns.displot(data_test, x="Temp3pm", hue='RainToday', kde=True)
+sns.displot(data_test_clean, x="Temp3pm", hue='RainToday', kde=True)
 plt.title("Temperature at 3pm Distribution", fontsize = 14)
 plt.show()
 
@@ -328,7 +329,7 @@ plt.show()
 # On the other hand, the range of pressure at 3 pm is from -5.1 ℃ to 46.7 ℃ and 27.68 ℃ of temperature has the highest frequency in the dataset.
 
 # %%
-df=data_test
+df=data_test_clean
 sns.histplot(df['Humidity9am'])
 
 # %%
@@ -344,8 +345,8 @@ sns.histplot(df['Cloud3pm'])
 sns.histplot(df['RainToday'])
 
 # %%
-x = list(data_test.MeanTemp)
-y = list(data_test.Rainfall)
+x = list(data_test_clean.MeanTemp)
+y = list(data_test_clean.Rainfall)
   
 fig = plt.figure(figsize = (10, 5))
  
@@ -362,7 +363,7 @@ plt.show()
 import seaborn as sns
 import plotly.express as px
 
-figure = px.scatter(data_frame = data_test, x="AvgHumidity",
+figure = px.scatter(data_frame = data_test_clean, x="AvgHumidity",
                     y="MeanTemp", size="AvgHumidity", 
                     trendline="ols", 
                     labels={
@@ -376,7 +377,7 @@ figure.show()
 # ## 2. Average WindSpeed Analysis
 
 # %%
-windspeed_weather_df = data_test.groupby(['Location'])[['WindSpeed9am', 'WindSpeed3pm']].mean()
+windspeed_weather_df = data_test_clean.groupby(['Location'])[['WindSpeed9am', 'WindSpeed3pm']].mean()
 windspeed_weather_df = windspeed_weather_df.reset_index()
 windspeed_weather_df.head()
 
@@ -404,7 +405,7 @@ plt.show()
 # ## 3. Average Humidity Analysis
 
 # %%
-humidity_weather_df = data_test.groupby(['Location'])[['Humidity9am', 'Humidity3pm']].mean()
+humidity_weather_df = data_test_clean.groupby(['Location'])[['Humidity9am', 'Humidity3pm']].mean()
 humidity_weather_df = humidity_weather_df.reset_index()
 humidity_weather_df.head()
 
@@ -432,7 +433,7 @@ plt.show()
 # ## 4. Average Pressure Analysis
 
 # %%
-pressure_weather_df = data_test.groupby(['Location'])[['Pressure9am', 'Pressure3pm']].mean()
+pressure_weather_df = data_test_clean.groupby(['Location'])[['Pressure9am', 'Pressure3pm']].mean()
 pressure_weather_df = pressure_weather_df.reset_index()
 pressure_weather_df.head()
 
@@ -460,7 +461,7 @@ plt.show()
 # ## 5. Average Temperature Analysis
 
 # %%
-location_weather_df = data_test.groupby(['Location'])[['MinTemp', 'MaxTemp', 'Temp9am', 'Temp3pm']].mean()
+location_weather_df = data_test_clean.groupby(['Location'])[['MinTemp', 'MaxTemp', 'Temp9am', 'Temp3pm']].mean()
 location_weather_df = location_weather_df.reset_index()
 location_weather_df.head()
 
@@ -501,7 +502,7 @@ positive_integers = []
 # Iterate over each column
 for column in numerical_columns:
     # Filter out positive integers from the column
-    positive_values = data_test[column][(data_test[column] > 0) & (data_test[column] % 1 == 0)]
+    positive_values = data_test_clean[column][(data_test_clean[column] > 0) & (data_test_clean[column] % 1 == 0)]
     # Append the positive integers to the list
     positive_integers.extend(positive_values.tolist())
 
@@ -521,7 +522,7 @@ columns = ['MinTemp', 'MaxTemp', 'Rainfall', 'WindGustSpeed', 'WindSpeed9am', 'W
            'Temp9am', 'Temp3pm', 'RainToday']
 
 # Calculate the mean for each column
-mean_values = data_test[columns].mean()
+mean_values = data_test_clean[columns].mean()
 
 # Print the mean for each column
 print("Mean for each column:")
@@ -536,7 +537,7 @@ columns = ['MinTemp', 'MaxTemp', 'Rainfall', 'WindGustSpeed', 'WindSpeed9am', 'W
            'Temp9am', 'Temp3pm', 'RainToday']
 
 # Calculate the standard deviation for each column
-std_values = data_test[columns].std()
+std_values = data_test_clean[columns].std()
 
 # Print the standard deviation for each column
 print("Standard deviation for each column:")
@@ -557,42 +558,6 @@ print("Mean:", mean_value)
 print("Standard Deviation:", std_deviation)
 
 # %% [markdown]
-# ## ANOVA test
-# The following code block will perform ANOVA on the dataset with 'RainToday' as the dependent variable and the other variables as independent variables. This test will help determine if there are any significant differences in the mean 'RainToday' values across different levels of the independent variables.
-
-# %%
-from scipy import stats
-
-# Extract the variables from the dataset
-MinTemp = data_test['MinTemp']
-MaxTemp = data_test['MaxTemp']
-Rainfall = data_test['Rainfall']
-WindGustSpeed = data_test['WindGustSpeed']
-WindSpeed9am = data_test['WindSpeed9am']
-WindSpeed3pm = data_test['WindSpeed3pm']
-Humidity9am = data_test['Humidity9am']
-Humidity3pm = data_test['Humidity3pm']
-Pressure9am = data_test['Pressure9am']
-Pressure3pm = data_test['Pressure3pm']
-Cloud9am = data_test['Cloud9am']
-Cloud3pm = data_test['Cloud3pm']
-Temp9am = data_test['Temp9am']
-Temp3pm = data_test['Temp3pm']
-RainToday = data_test['RainToday']
-
-# Perform one-way ANOVA
-fvalue, pvalue = stats.f_oneway(MinTemp, MaxTemp, Rainfall, WindGustSpeed, WindSpeed9am, WindSpeed3pm, Humidity9am,
-                                Humidity3pm, Pressure9am, Pressure3pm, Cloud9am, Cloud3pm, Temp9am, Temp3pm)
-
-# Print the results
-print("One-way ANOVA results:")
-print("F-value:", fvalue)
-print("p-value:", pvalue)
-
-# %% [markdown]
-# The f_oneway function from the scipy.stats module is used to perform the one-way ANOVA test. The resulting fvalue is the test statistic, and the pvalue is the associated p-value. Lower p-values indicate a higher likelihood of a significant difference in the mean 'RainToday' values across the independent variables.
-
-# %% [markdown]
 # ## Kruskal's algorithm
 # The following code block will perform Kruskal's algorithm on the dataset with 'RainToday' as the dependent variable and the other variables as independent variables. This non-parametric test is used when the dependent variable is categorical.
 
@@ -600,21 +565,21 @@ print("p-value:", pvalue)
 from scipy import stats
 
 # Extract the variables from the dataset
-MinTemp = data_test['MinTemp']
-MaxTemp = data_test['MaxTemp']
-Rainfall = data_test['Rainfall']
-WindGustSpeed = data_test['WindGustSpeed']
-WindSpeed9am = data_test['WindSpeed9am']
-WindSpeed3pm = data_test['WindSpeed3pm']
-Humidity9am = data_test['Humidity9am']
-Humidity3pm = data_test['Humidity3pm']
-Pressure9am = data_test['Pressure9am']
-Pressure3pm = data_test['Pressure3pm']
-Cloud9am = data_test['Cloud9am']
-Cloud3pm = data_test['Cloud3pm']
-Temp9am = data_test['Temp9am']
-Temp3pm = data_test['Temp3pm']
-RainToday = data_test['RainToday']
+MinTemp = data_test_clean['MinTemp']
+MaxTemp = data_test_clean['MaxTemp']
+Rainfall = data_test_clean['Rainfall']
+WindGustSpeed = data_test_clean['WindGustSpeed']
+WindSpeed9am = data_test_clean['WindSpeed9am']
+WindSpeed3pm = data_test_clean['WindSpeed3pm']
+Humidity9am = data_test_clean['Humidity9am']
+Humidity3pm = data_test_clean['Humidity3pm']
+Pressure9am = data_test_clean['Pressure9am']
+Pressure3pm = data_test_clean['Pressure3pm']
+Cloud9am = data_test_clean['Cloud9am']
+Cloud3pm = data_test_clean['Cloud3pm']
+Temp9am = data_test_clean['Temp9am']
+Temp3pm = data_test_clean['Temp3pm']
+RainToday = data_test_clean['RainToday']
 
 # Perform Kruskal-Wallis H test
 hvalue, pvalue = stats.kruskal(MinTemp, MaxTemp, Rainfall, WindGustSpeed, WindSpeed9am, WindSpeed3pm, Humidity9am,
@@ -623,7 +588,10 @@ hvalue, pvalue = stats.kruskal(MinTemp, MaxTemp, Rainfall, WindGustSpeed, WindSp
 # Print the results
 print("Kruskal-Wallis H test results:")
 print("H-value:", hvalue)
-print("p-value:", pvalue)
+print("p-value:", pvalue, end="\n\n")
+print('Can we reject H0 ?')
+print('Yes' if pvalue<0.01 else 'No')
+print('(There is a {}% chance of falsely obtaining this result)'.format(pvalue*100))
 
 # %% [markdown]
 # The kruskal function from the scipy.stats module is used to perform the Kruskal-Wallis H test. The resulting hvalue is the test statistic, and the pvalue is the associated p-value. Lower p-values indicate a higher likelihood of a significant difference in the 'RainToday' values across the independent variables.
@@ -641,7 +609,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.9, shuffl
 # %%
 RandomForestClassifierModel = RandomForestClassifier(criterion = 'gini', max_depth=17, n_estimators=100, random_state=44)
 RandomForestClassifierModel.fit(X_train, y_train)
-
 
 print('RandomForestClassifierModel Train Score is : ' , RandomForestClassifierModel.score(X_train, y_train))
 print('RandomForestClassifierModel Test Score is : ' , RandomForestClassifierModel.score(X_test, y_test))
@@ -808,7 +775,6 @@ plt.plot([0, 1], [0, 1], linestyle='--', lw=2, color='r', label='Random Guess')
 plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.0])
 plt.xlabel('False Positive Rate (FPR)')
-
 joblib.dump(gbc, 'gbc.joblib')
 
 # %%
